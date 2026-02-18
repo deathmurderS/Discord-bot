@@ -1,0 +1,52 @@
+// prisma/schema.prisma
+// Tambahkan model ini ke schema Prisma kamu yang sudah ada
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// === Model yang sudah kamu punya (contoh) ===
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  // Relasi ke session tracking
+  sessions  UserSession[]
+}
+
+// === Tambahkan 2 model baru ini ===
+
+model UserSession {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deviceType String   @default("unknown") // "mobile" | "desktop"
+  ipAddress  String?
+  userAgent  String?
+  isActive   Boolean  @default(true)
+  loginAt    DateTime @default(now())
+  lastSeen   DateTime @default(now())
+
+  @@index([userId])
+  @@index([isActive])
+  @@index([lastSeen])
+  @@map("user_sessions")
+}
+
+model DailyStat {
+  id            String   @id @default(cuid())
+  date          String   @unique // format: "YYYY-MM-DD"
+  totalLogins   Int      @default(0)
+  mobileLogins  Int      @default(0)
+  desktopLogins Int      @default(0)
+  uniqueUserIds String[] // array of userId
+
+  @@map("daily_stats")
+}
