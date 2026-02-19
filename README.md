@@ -1,4 +1,4 @@
-# 📊 K3I Discord Bot — NestJS + PostgreSQL + Prisma
+# 📊 Discord Bot — NestJS + PostgreSQL + Prisma
 
 Sistem monitoring login user k3i yang menampilkan statistik real-time di Discord, update tiap 30 detik.
 
