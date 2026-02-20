@@ -1,0 +1,39 @@
+{
+  "name": "k3i-monitor-bot",
+  "version": "1.0.0",
+  "description": "Discord bot to monitor K3I website user login count and update status in real-time",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "dev:debug": "DEBUG_MODE=true LOG_LEVEL=debug nodemon src/index.js",
+    "test": "echo \"No tests specified\"",
+    "setup": "cp .env.example .env && echo 'Please edit .env file with your configuration'"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "monitoring",
+    "real-time",
+    "user-count",
+    "k3i"
+  ],
+  "author": "opisboy29",
+  "license": "MIT",
+  "dependencies": {
+    "@nestjs/config": "^4.0.3",
+    "axios": "^1.13.5",
+    "cors": "^2.8.6",
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.3.1",
+    "express": "^4.22.1",
+    "node-cron": "^3.0.3",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
